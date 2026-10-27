@@ -31,3 +31,20 @@ jobs:
 
       - name: Executer Jest avec couverture
         run: npm test -- --coverage --runInBand
+
+  
+  docker-build: 
+
+    name: CI - Docker build
+    runs-on: ubuntu-latest
+    needs: tests
+
+    steps:
+      - name: Recuperer le code
+        uses: actions/checkout@v4
+
+      - name: Verifier Docker Compose
+        run: docker compose config -q
+
+      - name: Construire les images Docker
+        run: docker compose build    
