@@ -1,0 +1,13 @@
+
+services:
+  backend:
+    image: ursula1304/bouton-rouge-backend:dev
+    restart: unless-stopped
+
+  frontend:
+    image: ursula1304/bouton-rouge-frontend:dev
+    ports:
+      - "${FRONTEND_PORT:-8081}:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
