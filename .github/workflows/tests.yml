@@ -1,0 +1,34 @@
+
+name: CI - Tests Jest
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  tests:
+    name: Tests Backend
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - name: Recuperer le code
+        uses: actions/checkout@v4
+
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Installer les dependances
+        run: npm ci
+
+      - name: Executer les tests Jest
+        run: npm test -- --runInBand
+
