@@ -1,5 +1,5 @@
 
-name: CI - Tests Jest
+name: CI/CD - Le Bouton Rouge
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   tests:
-    name: Tests Backend
+    name: CI - Tests Jest
     runs-on: ubuntu-latest
 
     defaults:
@@ -29,6 +29,5 @@ jobs:
       - name: Installer les dependances
         run: npm ci
 
-      - name: Executer les tests Jest
-        run: npm test -- --runInBand
-
+      - name: Executer Jest avec couverture
+        run: npm test -- --coverage --runInBand
