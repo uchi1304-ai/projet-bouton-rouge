@@ -32,6 +32,13 @@ jobs:
       - name: Installer les dependances
         run: npm ci
 
+      - name: Audit securite Backend
+        run: npm audit --omit=dev --audit-level=high
+
+      - name: Audit securite Frontend
+        working-directory: frontend
+        run: npm audit --audit-level=high
+
       - name: Executer Jest avec couverture
         run: npm test -- --coverage --runInBand
 
