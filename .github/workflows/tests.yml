@@ -79,6 +79,13 @@ jobs:
       - name: Build Frontend
         run: docker build -t bouton-frontend:scan ./frontend
 
+      - name: Smoke Test - Backend y Frontend
+        run: |
+          docker compose -f compose.yaml up -d --build --wait --wait-timeout 120
+          curl --fail --silent --show-error http://localhost:3000/health
+          curl --fail --silent --show-error http://localhost:8080/
+
+          
       # Analizar el backend ANTES de publicarlo
       - name: Trivy - Scanner Backend
         uses: aquasecurity/trivy-action@v0.36.0
