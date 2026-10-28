@@ -1,0 +1,17 @@
+name: Test Runner Auto-Heberge
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-runner:
+    name: Tester mon runner Docker
+    runs-on: [self-hosted, linux, x64, bouton-runner]
+
+    steps:
+      - name: Verifier le runner
+        run: |
+          echo "Bonjour depuis mon runner auto-heberge !"
+          hostname
+          whoami
+          uname -a
