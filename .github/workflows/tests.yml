@@ -86,12 +86,23 @@ jobs:
           curl --fail --silent --show-error http://localhost:8080/
 
       # Analizar la seguridad de la aplicacion web
-      - name: ZAP - Analyse de securite Web
+      # ZAP - Analizar el Frontend
+      - name: ZAP - Scanner Frontend
         uses: zaproxy/action-baseline@v0.15.0
         with:
           target: 'http://localhost:8080'
           allow_issue_writing: false
           fail_action: false
+          artifact_name: zap_frontend
+
+      # ZAP - Analizar el Backend
+      - name: ZAP - Scanner Backend
+        uses: zaproxy/action-baseline@v0.15.0
+        with:
+          target: 'http://localhost:3000/health'
+          allow_issue_writing: false
+          fail_action: false
+          artifact_name: zap_backend
           
       # Analizar el backend ANTES de publicarlo
       - name: Trivy - Scanner Backend
