@@ -33,7 +33,7 @@ jobs:
         run: npm ci
 
       - name: Audit securite Backend
-        run: npm audit --omit=dev --audit-level=high
+        run: npm audit --audit-level=high
 
       - name: Audit securite Frontend
         working-directory: frontend
